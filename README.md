@@ -1,6 +1,6 @@
 # SRE Platform Challenge
 
-Bem vindo(a)! Esse desafio será importante te avaliarmos e você entender melhor como é a realidade do time no dia a dia, por isso, pensamos em um desafio bem próximo a nossa realidade.
+Bem vindo(a), e obrigado pelo seu interesse na Stone! Esse desafio será importante te avaliarmos e para você entender melhor como é a realidade do time no dia a dia, por isso, pensamos em um desafio bem próximo a nossa realidade.
 
 É importante ressaltar que nenhum código produzido por você nesse desafio será utilizado na Stone, tudo que for feito será utilizado apenas para te avaliar nesse desafio.
 
@@ -8,7 +8,10 @@ Você não precisa entregar o desafio completo, mesmo que não implemente alguma
 
 ## O desafio
 
-Você deverá desenvolver um operator que é capaz de gerenciar o ciclo de vida de um Repositório do GitHub.
+O produto do nosso time é uma plataforma interna para desenvolvedores, a plataforma é capaz de provisionar recursos para aplicações, como repositórios, pipelines de CD, e databases.  
+A plataforma é contruída extendendo a API do kubernetes usando o padrão `Operator`, assim ela pode ser consumida com uma abordagem de IaC (Infra as Code), ou integrada como uma API HTTP.
+
+Você deverá implementar algumas funcionalidades em um operator que deve ser capaz de gerenciar o ciclo de vida de um Repositório do GitHub.
 
 Um exemplo do manifesto Kubernetes que representa o CRD (_Custom Resource Definition_) é:
 
@@ -20,7 +23,7 @@ metadata:
 spec:
   name: golang-best-practices
   owner: stone-payments
-  type: OpenSource
+  type: OpenSource # ClosedSource
   credentialsRef:
     name: github-credentials
     namespace: default
@@ -30,15 +33,55 @@ spec:
 Os possíveis campos no spec do CRD são:
 - `name` (obrigatório): nome do repositório no GitHub.
 - `owner` (obrigatório): nome do owner do repositório no GitHub. Esse owner pode ser tanto um usuário como uma organização.
-- `type` (obrigatório): tipo do repositório a ser criado. As definições desse campo se encontram na [subseção abaixo](#o-campo-type).
-- `credentialsRef` (obrigatório): referência para uma chave de uma `Secret` que conterá o PAT (_Personal Access Token_) para se autenticar com a API do GitHub.
+- `type` (obrigatório): tipo do repositório a ser criado.
+- `credentialsRef` (obrigatório): referência para uma chave de um `Secret` que conterá o PAT (_Personal Access Token_) para se autenticar com a API do GitHub.
 - `description` (opcional): a descrição do repositório.
 
-### O campo `type`
+## Como fazer o desafio
 
-Os possíveis valores do campo `spec.type` são: `OpenSource`, `ClosedSource` e `Template`.
+A solução já apresenta uma implementação inicial incompleta. Você deve implementar as tarefas descritas no entregáveis que os avaliadores te indicarem, não é necessário completar os outros entregáveis.
 
-A configuração do repositório que o operator criará depende diretamente de qual `type` ele é. Abaixo estão as definições de cada um dos tipos.
+Dentro desse repositório, existem duas principais pastas: `client` e `controllers`.
+
+A pasta `client` contém todo código responsável por se comunicar com a API do GitHub.
+
+A pasta `controller` contém a implementação do operator `Repository`, que utiliza o pacote `client`.
+> É importante ressaltar que você deve utilizar o client que está neste repositório e não um sdk externo. A utilização, melhoria e implementação dele também fazem parte do desafio.
+
+Os testes devem ser adicionados em arquivos `_test.go` junto aos arquivos sendo testados.  
+Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuilder.io/).
+
+### Entregável 1
+
+Suporte a credenciais vindas de um kubernetes `Secret`  
+
+1. Adaptar a controller para recuperar o PAT no secret referenciado no resource e repassalo ao client.
+
+### Entregável 2
+
+Corrigir bug onde a controller tenta criar um novo repo independentemente do status do recurso externamente.
+
+1. Implementar o método Get no client;
+2. Invocar a criação do repo na controller somente quando o erro retornado for `404 Not found`;
+
+### Entregável 3
+
+Suporte a rotina de atualização. Quando o custom resource é alterado no kubernetes o recurso externo correspondente deve ser atualizado de acordo.
+
+1. Implementar o método Update no client;
+2. Adicionar o campo `spec.description` (deve ser do tipo `*string` e opcional);
+3. Implementar na controller a lógica de verificação se o `Repository` deve ser atualizado externamente ou não (verificar se a especificação do estado do recurso no Kubernetes bate com o estado atual do GitHub);
+4. Adicionar o campo status.ID (tipo string e opcional) que deve ser populado durante a reconciliação do recurso;
+
+### Entregável 4
+
+Adicionar suporte ao `type` 'ClosedSource'. 
+
+1. Implementar o método `Archive` no client;
+2. Adequar a lógica de deleção baseada no `type` do repositório;
+3. Adequar a configuração de criação do repositório baseada no `type`;
+
+Os possíveis valores do campo `spec.type` são: `OpenSource` ou `ClosedSource`.
 
 #### OpenSource
 
@@ -55,64 +98,36 @@ A configuração do repositório que o operator criará depende diretamente de q
 - Sem licença;
 - Arquivar o repositório no processo de deleção (arquivar ao invés de deletar);
 
-#### Template
-- Repositório privado;
-- Sem issues;
-- Sem inicialização automática;
-- Sem licença;
+### Entregável 5
 
-## Como fazer o desafio
+Configuração do CI do repo de desafio
 
-Dentro desse repositório, existem duas principais pastas: `sdk` e `github`.
+1. Criação de um pipeline de CI (_Continuous Integration_) usando github actions que executa os testes automaticamente, o gatilho para execução do CI devem ser criação de PRs (Pull Requests) ou commits na branch `main`;
 
-A pasta `sdk` contém todo código responsável por se comunicar com a API do GitHub.
+## Avaliação
 
-A pasta `github` contém a implementação do operator `Repository`, que utiliza o SDK (_Software Development Kit_) da pasta `sdk`.
-> É importante ressaltar que você deve utilizar o SDK que está neste repositório. A utilização, melhoria e implementação do SDK também fazem parte do desafio.
+Você será avaliado e acordo com os seguintes critérios.
 
-### Entregável 1
+### Funcionalidade: até 5 pontos:
 
-A solução já apresenta uma implementação inicial de algumas partes. Você pode modificar a implementação existente como desejar, não há restrições. 
+1. Todos os entregáveis **designados** concluídos, implementados corretamente, e com testes. *5 pts*
+1. Todos os entregáveis **designados** concluídos, implementados corretamente. *3 pts*
+1. Todos os entregáveis **designados** concluídos, possivelmente com erros, mas executando. *2 pts*
+1. Ao menos um dos entregáveis implementado, possivelmente com erros, mas executando. *1 pt*
+1. Qualquer coisa diferente disso. *0 pts*
 
-#### SDK
+### Estilo de código e convenções: até 4 pontos:
 
-Algumas tarefas que você deverá fazer no SDK:
+1. Codigo logicamente organizado e com comentários claros. Estilo no código e na documentação é claro e consistente. Tratamento adequado de erros quando necessário. *4 pts*
+1. Codigo logicamente organizado e com comentários claros. Estilo no código e na documentação é claro e consistente. *3 pts*
+1. Codigo logicamente organizado, mas documentação é inconsistente ou confusa. *2 pts*
+1. Codigo desorganizado e difícil de acompanhar. Estilo arbitrário e inconsistente. *1 pt*
+1. Qualquer coisa diferente disso. *0 pts*
 
-1.  Remover o PAT que está hard-coded e recebê-lo através de parâmetros na inicialização do `Client`;
-2.  Implementar o método `Update`;
+## Enviando sua solução para avaliação
 
-
-#### Operator
-
-Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuilder.io/). As tarefas que deverão ser feitas no operator são:
-
-1. Extrair as credenciais a serem utilizadas de uma `Secret` que foi referenciada no `spec` do CRD do `Repository`;
-
-2. Adicionar o campo `spec.description` (deve ser do tipo `*string` e opcional);
-
-3.  Adicionar o campo `status.ID` (tipo `string` e opcional) que deve ser populado durante a reconciliação do recurso;
-
-4. Implementar a lógica de verificação se o `Repository` deve ser atualizado externamente ou não (verificar se a especificação do estado do recurso no Kubernetes bate com o estado atual do GitHub);
-
-### Entregável 2
-
-#### SDK
-1.  Implementar o método `Archive`;
-
-#### Operator
-1. Adequar a lógica de deleção baseada no `type` do repositório;
-
-2. Corrigir o tratamento de erros no `Get` da controller para ele retornar apenas os erros diferentes de `404 Not found`;
-
-### Entregável 3
-
-#### SDK
-1. Adaptar o SDK para ser testável por seus clientes (nesse caso, o operator);
-
-#### Operator
-1. Implementação de testes de unidade para garantir que o `Repository` gerado está sendo configurado corretamente;
-
-2. Criação de um pipeline de CI (_Continuous Integration_) que executa os testes automaticamente com triggers para criação de PRs (Pull Requests) ou commits na branch `main`;
+Você pode forkar esse repo, mas não recomendamos fazer isso diretamente, já que assim qualquer um poderá ver no que você está trabalhando.
+Você pode trabalhar em um repo privado e nos dar acesso quando estiver pronto, ou nos enviar um zip (contendo também o .git) para o email fornecido pelos avaliadores.
 
 ## Referências
 
