@@ -1,14 +1,14 @@
 # SRE Platform Challenge
 
-Bem vindo(a), e obrigado pelo seu interesse na Stone! Esse desafio será importante te avaliarmos e para você entender melhor como é a realidade do time no dia a dia, por isso, pensamos em um desafio bem próximo a nossa realidade.
+Bem vindo(a), e obrigado pelo seu interesse na Stone! Esse desafio será importante para te avaliarmos e para você entender melhor como é o nosso dia a dia. Por isso, pensamos em um desafio bem próximo a nossa realidade.
 
 É importante ressaltar que nenhum código produzido por você nesse desafio será utilizado na Stone, tudo que for feito será utilizado apenas para te avaliar nesse desafio.
 
-Você não precisa entregar o desafio completo, mesmo que não implemente alguma parte, entregue-o mesmo assim e discutiremos sobre as implementações feitas!
+Você não precisa entregar o desafio completo. Mesmo que não implemente alguma parte, entregue-o mesmo assim e discutiremos sobre as implementações feitas!
 
 ## O desafio
 
-O produto do nosso time é uma plataforma interna para desenvolvedores, a plataforma é capaz de provisionar recursos para aplicações, como repositórios, pipelines de CD e databases.  
+O produto do nosso time é uma plataforma interna para desenvolvedores. A plataforma é capaz de provisionar recursos para aplicações, como repositórios, pipelines de CI/CD e databases.  
 A plataforma é contruída extendendo a API do Kubernetes usando o padrão `Operator`, assim ela pode ser consumida com uma abordagem de IaC (Infra as Code) ou integrada como uma API HTTP.
 
 Você deverá implementar algumas funcionalidades em um operator que deve ser capaz de gerenciar o ciclo de vida de um Repositório do GitHub.
@@ -34,14 +34,14 @@ Os possíveis campos no spec do CRD são:
 - `name` (obrigatório): nome do repositório no GitHub.
 - `owner` (obrigatório): nome do owner do repositório no GitHub. Esse owner pode ser um usuário ou uma organização.
 - `type` (obrigatório): tipo do repositório a ser criado.
-- `credentialsRef` (obrigatório): referência para uma chave de um `Secret` que conterá o PAT (_Personal Access Token_) para se autenticar com a API do GitHub.
+- `credentialsRef` (obrigatório): referência para uma chave de um `Secret` que conterá um PAT (_Personal Access Token_) para se autenticar com a API do GitHub.
 - `description` (opcional): a descrição do repositório.
 
 ## Como fazer o desafio
 
-A solução já apresenta uma implementação inicial incompleta. Você deve implementar as tarefas descritas no entregáveis que os avaliadores te indicarem, não é necessário completar os outros entregáveis.
+O código neste repositório já apresenta uma implementação inicial incompleta. Você deve implementar as tarefas descritas nos entregáveis que os avaliadores te indicarem, não é necessário completar os outros entregáveis.
 
-Dentro desse repositório, existem duas principais pastas: `client` e `controllers`.
+Dentro deste repositório, existem duas principais pastas: `client` e `controllers`.
 
 A pasta `client` contém todo código responsável por se comunicar com a API do GitHub.
 
@@ -49,7 +49,7 @@ A pasta `controllers` contém a implementação do operator `Repository`, que ut
 > É importante ressaltar que você deve utilizar o client que está neste repositório e não um sdk externo. A utilização, melhoria e implementação dele também fazem parte do desafio.
 
 Os testes devem ser adicionados em arquivos `*_test.go` junto aos arquivos sendo testados.  
-Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuilder.io/).
+Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuilder.io/), um dos frameworks mais populares para a construção de operators Kubernetes.
 
 ### Entregável 1
 
