@@ -1,0 +1,12 @@
+apiVersion: repositories.platform.buy4.io/v1alpha1
+kind: Repository
+metadata:
+  name: example
+spec:
+  name: golang-best-practices
+  owner: Feggah
+  type: OpenSource
+  credentialsRef:
+    name: github-credentials
+    namespace: default
+    key: token

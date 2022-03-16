@@ -1,0 +1,16 @@
+domain: platform.buy4.io
+layout:
+- go.kubebuilder.io/v3
+projectName: github
+repo: github.com/stone-payments/stone-sreplatform-challenge
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: platform.buy4.io
+  group: repositories
+  kind: Repository
+  path: github.com/stone-payments/stone-sreplatform-challenge/api/v1alpha1
+  version: v1alpha1
+version: "3"
