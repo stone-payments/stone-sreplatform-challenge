@@ -8,7 +8,7 @@ Você não precisa entregar o desafio completo. Mesmo que não implemente alguma
 
 ## O desafio
 
-O produto do nosso time é uma plataforma interna para desenvolvedores. A plataforma é capaz de provisionar recursos para aplicações, como repositórios, pipelines de CI/CD e databases.  
+O produto do nosso time é uma plataforma interna para desenvolvedores. A plataforma é capaz de provisionar recursos para aplicações, como repositórios, pipelines de CI/CD e databases.
 A plataforma é contruída extendendo a API do Kubernetes usando o padrão `Operator`, assim ela pode ser consumida com uma abordagem de IaC (Infra as Code) ou integrada como uma API HTTP.
 
 Você deverá implementar algumas funcionalidades em um operator que deve ser capaz de gerenciar o ciclo de vida de um Repositório do GitHub.
@@ -31,6 +31,7 @@ spec:
 ```
 
 Os possíveis campos no spec do CRD são:
+
 - `name` (obrigatório): nome do repositório no GitHub.
 - `owner` (obrigatório): nome do owner do repositório no GitHub. Esse owner pode ser um usuário ou uma organização.
 - `type` (obrigatório): tipo do repositório a ser criado.
@@ -54,7 +55,7 @@ Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuild
 
 ### Entregável 1
 
-Suporte a credenciais vindas de um kubernetes `Secret`  
+Suporte a credenciais vindas de um kubernetes `Secret`
 
 1. Adaptar a controller para recuperar o PAT do `Secret` referenciado no resource e repassá-lo ao client.
 
@@ -76,7 +77,7 @@ Suporte à rotina de atualização. Quando o custom resource é alterado no Kube
 
 ### Entregável 4
 
-Adicionar suporte ao `type` 'ClosedSource'. 
+Adicionar suporte ao `type` 'ClosedSource'.
 
 _Os possíveis valores do campo `spec.type` são: `OpenSource` ou `ClosedSource`._
 
@@ -113,21 +114,21 @@ Configuração do CI do repo de desafio
 
 Você será avaliado e acordo com os seguintes critérios.
 
-### Funcionalidade: até 5 pontos:
+### Funcionalidade: até 5 pontos
 
-1. Todos os entregáveis **designados** concluídos, implementados corretamente e com testes. *5 pts*
-1. Todos os entregáveis **designados** concluídos e implementados corretamente. *3 pts*
-1. Todos os entregáveis **designados** concluídos, possivelmente com erros, mas executando. *2 pts*
-1. Ao menos um dos entregáveis implementado, possivelmente com erros, mas executando. *1 pt*
-1. Qualquer coisa diferente disso. *0 pts*
+1. Todos os entregáveis **designados** concluídos, implementados corretamente e com testes. _5 pts_
+1. Todos os entregáveis **designados** concluídos e implementados corretamente. _3 pts_
+1. Todos os entregáveis **designados** concluídos, possivelmente com erros, mas executando. _2 pts_
+1. Ao menos um dos entregáveis implementado, possivelmente com erros, mas executando. _1 pt_
+1. Qualquer coisa diferente disso. _0 pts_
 
-### Estilo de código e convenções: até 4 pontos:
+### Estilo de código e convenções: até 4 pontos
 
-1. Código logicamente organizado e com comentários claros. Estilo no código e na documentação é claro e consistente. Tratamento adequado de erros quando necessário. *4 pts*
-1. Código logicamente organizado e com comentários claros. Estilo no código e na documentação é claro e consistente. *3 pts*
-1. Código logicamente organizado, mas documentação é inconsistente ou confusa. *2 pts*
-1. Código desorganizado e difícil de acompanhar. Estilo arbitrário e inconsistente. *1 pt*
-1. Qualquer coisa diferente disso. *0 pts*
+1. Código logicamente organizado e com comentários claros. Estilo no código e na documentação é claro e consistente. Tratamento adequado de erros quando necessário. _4 pts_
+1. Código logicamente organizado e com comentários claros. Estilo no código e na documentação é claro e consistente. _3 pts_
+1. Código logicamente organizado, mas documentação é inconsistente ou confusa. _2 pts_
+1. Código desorganizado e difícil de acompanhar. Estilo arbitrário e inconsistente. _1 pt_
+1. Qualquer coisa diferente disso. _0 pts_
 
 ## Enviando sua solução para avaliação
 
@@ -139,12 +140,11 @@ Você pode trabalhar em um repositório privado e nos dar acesso quando estiver 
 Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materiais de estudos:
 
 ### Go
+
 - [A Tour of Go](https://go.dev/tour/)
 - [Curso Aprenda Go](https://youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg)
 - [Aprenda Go com Testes](https://larien.gitbook.io/aprenda-go-com-testes/)
 - [Effective Go](https://go.dev/doc/effective_go)
-
-
 
 ### Kubernetes Operator/Kubebuilder
 
@@ -158,5 +158,6 @@ Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materi
 - [Testing Kubernetes CRDs - Christie Wilson, Google](https://youtu.be/T4EB0KB1-fc)
 
 ### Boas práticas
+
 - [Uber-go guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Boas práticas na Stone](https://github.com/stone-payments/stoneco-best-practices/blob/master/README_pt.md)
