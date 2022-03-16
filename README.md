@@ -48,7 +48,8 @@ A pasta `client` contém todo código responsável por se comunicar com a API do
 A pasta `controllers` contém a implementação do operator `Repository`, que utiliza o pacote `client`.
 > É importante ressaltar que você deve utilizar o client que está neste repositório e não um sdk externo. A utilização, melhoria e implementação dele também fazem parte do desafio.
 
-Os testes devem ser adicionados em arquivos `*_test.go` junto aos arquivos sendo testados.  
+Os testes devem ser adicionados em arquivos `*_test.go` junto aos arquivos sendo testados. Os testes presentes neste repositório utilizam o framework [Ginkgo](https://onsi.github.io/ginkgo/).
+
 Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuilder.io/), um dos frameworks mais populares para a construção de operators Kubernetes.
 
 ### Entregável 1
@@ -66,7 +67,7 @@ Corrigir bug onde a controller tenta criar um novo repositório independentement
 
 ### Entregável 3
 
-Suporte a rotina de atualização. Quando o custom resource é alterado no Kubernetes o recurso externo correspondente deve ser atualizado de acordo.
+Suporte à rotina de atualização. Quando o custom resource é alterado no Kubernetes o recurso externo correspondente deve ser atualizado de acordo.
 
 1. Implementar o método `Update` no client;
 2. Adicionar o campo `spec.description` (deve ser do tipo `*string` e opcional);
@@ -77,26 +78,30 @@ Suporte a rotina de atualização. Quando o custom resource é alterado no Kuber
 
 Adicionar suporte ao `type` 'ClosedSource'. 
 
-1. Implementar o método `Archive` no client;
-2. Adequar a lógica de deleção baseada no `type` do repositório;
-3. Adequar a configuração de criação do repositório baseada no `type`;
+_Os possíveis valores do campo `spec.type` são: `OpenSource` ou `ClosedSource`._
 
-Os possíveis valores do campo `spec.type` são: `OpenSource` ou `ClosedSource`.
+O parâmetro type representa uma lógica de negócio da empresa implementada no operator. Cada _type_ implica em um conjunto diferente de características no repo gerenciado pelo operator:
 
-#### OpenSource
+OpenSource:
 
 - Repositório público;
 - Possui issues;
 - Inicializado automaticamente com o arquivo `README.md`;
 - Licença `Apache License 2.0`;
 
-#### ClosedSource
+ClosedSource:
 
 - Repositório privado;
 - Sem issues;
 - Inicializado automaticamente com o arquivo `README.md`;
 - Sem licença;
 - Arquivar o repositório no processo de deleção (arquivar ao invés de deletar);
+
+Tarefas:
+
+1. Implementar o método `Archive` no client;
+2. Adequar a lógica de deleção baseada no `type` do repositório;
+3. Adequar a configuração de criação do repositório baseada no `type`;
 
 ### Entregável 5
 
