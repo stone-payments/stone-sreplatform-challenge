@@ -73,7 +73,7 @@ Suporte à rotina de atualização. Quando o custom resource é alterado no Kube
 1. Implementar o método `Update` no client;
 2. Adicionar o campo `spec.description` (deve ser do tipo `*string` e opcional);
 3. Implementar na controller a lógica de verificação se o `Repository` deve ser atualizado externamente ou não (verificar se a especificação do estado do recurso no Kubernetes bate com o estado atual do GitHub);
-4. Adicionar o campo `status.ID` (tipo `string` e opcional) que deve ser populado durante a reconciliação do recurso;
+4. Adicionar o campo `status.ID` (tipo `int64` e opcional) que deve ser populado durante a reconciliação do recurso;
 
 ### Entregável 4
 
@@ -135,6 +135,13 @@ Você será avaliado e acordo com os seguintes critérios.
 Você pode forkar esse repositório, mas não recomendamos fazer isso diretamente, já que assim qualquer um poderá ver no que você está trabalhando.
 Você pode trabalhar em um repositório privado e nos dar acesso quando estiver pronto, ou nos enviar um zip (contendo também o `.git`) para o e-mail fornecido pelos avaliadores.
 
+## Setup de desenvolvimento local
+
+Durante o ciclo de desenvolvimento, recomendamos que utilize um cluster local. Isso evita faturas em cloud providers e torna o ciclo de desenvolvimento mais simples. Para isso, recomendamos que utilize qualquer uma das ferramentas abaixo:
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [Kind](https://kind.sigs.k8s.io/)
+- [K3D](https://k3d.io/)
+
 ## Referências
 
 Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materiais de estudos:
@@ -145,6 +152,10 @@ Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materi
 - [Curso Aprenda Go](https://youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg)
 - [Aprenda Go com Testes](https://larien.gitbook.io/aprenda-go-com-testes/)
 - [Effective Go](https://go.dev/doc/effective_go)
+
+### Kubernetes
+- [Secrets](https://kubernetes.io/pt-br/docs/concepts/configuration/secret/)
+- [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 
 ### Kubernetes Operator/Kubebuilder
 
