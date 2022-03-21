@@ -70,6 +70,8 @@ Corrigir bug onde a controller tenta criar um novo repositório independentement
 
 Suporte à rotina de atualização. Quando o custom resource é alterado no Kubernetes o recurso externo correspondente deve ser atualizado de acordo.
 
+Os campos `spec.name`, `spec.owner` e `spec.type` devem ser imutáveis.
+
 1. Implementar o método `Update` no client;
 2. Adicionar o campo `spec.description` (deve ser do tipo `*string` e opcional);
 3. Implementar na controller a lógica de verificação se o `Repository` deve ser atualizado externamente ou não (verificar se a especificação do estado do recurso no Kubernetes bate com o estado atual do GitHub);
