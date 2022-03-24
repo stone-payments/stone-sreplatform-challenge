@@ -43,12 +43,9 @@ spec:
                     type: string
                   name:
                     type: string
-                  namespace:
-                    type: string
                 required:
                 - key
                 - name
-                - namespace
                 type: object
               name:
                 description: The name of the Repository.

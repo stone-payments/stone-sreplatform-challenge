@@ -26,7 +26,6 @@ spec:
   type: OpenSource # or ClosedSource
   credentialsRef:
     name: github-credentials
-    namespace: default
     key: token
 ```
 
@@ -151,7 +150,6 @@ Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materi
 ### Go
 
 - [A Tour of Go](https://go.dev/tour/)
-- [Curso Aprenda Go](https://youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg)
 - [Aprenda Go com Testes](https://larien.gitbook.io/aprenda-go-com-testes/)
 - [Effective Go](https://go.dev/doc/effective_go)
 
@@ -165,12 +163,11 @@ Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materi
 - [The Kubebuilder Book](https://kubebuilder.io/)
 - [Tutorial: Deep Dive into the Operator Framework for... Melvin Hillsman, Michael Hrivnak, & Matt Dorn](https://youtu.be/8_DaCcRMp5I) - (até os 37 minutos)
 - [Writing a Kubernetes Operator from Scratch Using Kubebuilder - Dinesh Majrekar](https://youtu.be/LLVoyXjYlYM)
-- [Tutorial: Zero to Operator in 90 Minutes! - Solly Ross, Google](https://youtu.be/KBTXBUVNF2I)
-- [Repositório da implementação do Azure Databricks Operator](https://github.com/Azure/azure-databricks-operator)
+
+### Testes
 - [Testing framework Ginkgo](https://onsi.github.io/ginkgo/)
 - [Testing Kubernetes CRDs - Christie Wilson, Google](https://youtu.be/T4EB0KB1-fc)
 
 ### Boas práticas
 
-- [Uber-go guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Boas práticas na Stone](https://github.com/stone-payments/stoneco-best-practices/blob/master/README_pt.md)

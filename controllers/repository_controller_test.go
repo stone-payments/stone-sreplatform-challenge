@@ -19,18 +19,17 @@ var _ = Describe("Repository Controller", func() {
 
 	Context("The Repository controller", func() {
 		It("Should ...", func() {
-			secretRef := repositoriesv1alpha1.SecretKeyReference{
-				Name:      "mock",
-				Namespace: "default",
-				Key:       "token",
-			}
-			err := createReferencedSecret(secretRef.Name, secretRef.Namespace, secretRef.Key, "MYF4K3P4T")
-			Expect(err).ToNot(HaveOccurred())
-
 			nn := types.NamespacedName{
 				Name:      "test-repository",
 				Namespace: "default",
 			}
+
+			secretRef := repositoriesv1alpha1.SecretKeyReference{
+				Name: "mock",
+				Key:  "token",
+			}
+			err := createReferencedSecret(secretRef.Name, nn.Namespace, secretRef.Key, "MYF4K3P4T")
+			Expect(err).ToNot(HaveOccurred())
 
 			_ = &repositoriesv1alpha1.Repository{
 				ObjectMeta: metav1.ObjectMeta{
