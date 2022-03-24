@@ -109,7 +109,7 @@ Tarefas:
 
 Configuração do CI do repo de desafio
 
-1. Criação de um pipeline de CI (_Continuous Integration_) usando Github Actions que executa os testes automaticamente. O gatilho para execução do CI devem ser criação de PRs (Pull Requests) ou commits na branch `main`;
+1. Criação de um pipeline de CI (_Continuous Integration_) usando Github Actions que executa os testes automaticamente. Os gatilhos para execução do CI devem ser `pull_request` e `push` para a branch `main`;
 
 ## Avaliação
 
