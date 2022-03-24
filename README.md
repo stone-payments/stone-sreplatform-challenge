@@ -32,7 +32,7 @@ spec:
 Os possíveis campos no spec do CRD são:
 
 - `name` (obrigatório): nome do repositório no GitHub.
-- `owner` (obrigatório): nome do owner do repositório no GitHub. Esse owner pode ser um usuário ou uma organização.
+- `owner` (obrigatório): nome do owner do repositório no GitHub.
 - `type` (obrigatório): tipo do repositório a ser criado.
 - `credentialsRef` (obrigatório): referência para uma chave de um `Secret` que conterá um PAT (_Personal Access Token_) para se autenticar com a API do GitHub.
 - `description` (opcional): a descrição do repositório.
