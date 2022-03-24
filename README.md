@@ -147,6 +147,8 @@ Durante o ciclo de desenvolvimento, recomendamos que utilize um cluster local. I
 - [Kind](https://kind.sigs.k8s.io/)
 - [K3D](https://k3d.io/)
 
+Depois dessa instalação, siga o [Quick Start do Kubebuilder](https://kubebuilder.io/quick-start.html#test-it-out) para entender como utilizar o Makefile do repositório para auxiliar no seu processo de desenvolvimento.
+
 ## Referências
 
 Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materiais de estudos:
