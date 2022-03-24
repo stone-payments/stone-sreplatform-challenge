@@ -52,6 +52,8 @@ Os testes devem ser adicionados em arquivos `*_test.go` junto aos arquivos sendo
 
 Para a implementação do operator, utilizamos o [kubebuilder](https://kubebuilder.io/), um dos frameworks mais populares para a construção de operators Kubernetes.
 
+Deixar de fazer qualquer parte do desafio **não** é motivo de eliminação do processo. O importante é o envio do que foi resolvido e a discussão subsequente com os avaliadores.
+
 ### Entregável 1
 
 Suporte a credenciais vindas de um kubernetes `Secret`
@@ -113,6 +115,8 @@ Configuração do CI do repo de desafio
 
 ## Avaliação
 
+A avaliação nesse desafio será dividida em uma objetiva do código, que está detalhada nos subtópicos abaixo, e uma discussão com os avaliadores em uma reunião sobre o que foi apresentado como solução.
+
 Você será avaliado e acordo com os seguintes critérios.
 
 ### Funcionalidade: até 5 pontos
@@ -167,7 +171,3 @@ Para ajudá-lo no processo de estudos sobre os assuntos, separamos alguns materi
 ### Testes
 - [Testing framework Ginkgo](https://onsi.github.io/ginkgo/)
 - [Testing Kubernetes CRDs - Christie Wilson, Google](https://youtu.be/T4EB0KB1-fc)
-
-### Boas práticas
-
-- [Boas práticas na Stone](https://github.com/stone-payments/stoneco-best-practices/blob/master/README_pt.md)
