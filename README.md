@@ -74,7 +74,7 @@ Os campos `spec.name`, `spec.owner` e `spec.type` devem ser imutáveis.
 1. Implementar o método `Update` no client;
 2. Adicionar o campo `spec.description` (deve ser do tipo `*string` e opcional);
 3. Implementar na controller a lógica de verificação se o `Repository` deve ser atualizado externamente ou não (verificar se a especificação do estado do recurso no Kubernetes bate com o estado atual do GitHub);
-4. Adicionar o campo `status.ID` (tipo `int64` e opcional) que deve ser populado durante a reconciliação do recurso;
+4. Adicionar o campo `status.ID` (tipo `int64` e opcional) que deve ser o valor do `ID` do repositório no GitHub;
 
 ### Entregável 4
 
